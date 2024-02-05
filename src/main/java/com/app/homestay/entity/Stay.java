@@ -18,16 +18,24 @@ public class Stay {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name="ownerId")
+    @JoinColumn(name="owner_id")
     @JsonBackReference(value="hs-ref")
     private Owner owner;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "locationId",referencedColumnName = "id")
+    @JoinColumn(name = "location_id",referencedColumnName = "id")
     private Location location;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "contactId",referencedColumnName = "id")
+    @JoinColumn(name = "contact_id",referencedColumnName = "id")
     private Contact contact;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "rule_food_id",referencedColumnName = "id")
+    private RuleFoodAmenitie rule;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "media_id",referencedColumnName = "id")
+    private Media media;
 
 
 }

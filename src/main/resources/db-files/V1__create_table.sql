@@ -47,6 +47,21 @@ CREATE TABLE hs_owner (
 	CONSTRAINT fk_hsowner_contact1 FOREIGN KEY (contact_id) REFERENCES contact_details(id)
 );
 
+CREATE TABLE rule_food (
+	id bigserial NOT NULL,
+	rule varchar NULL,
+	food varchar NULL,
+	amenitie varchar NULL,
+	CONSTRAINT rule_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE media (
+	id bigserial NOT NULL,
+	video varchar NULL,
+	image varchar NULL,
+	CONSTRAINT media_pkey PRIMARY KEY (id)
+);
+
 
 -- public.homestay definition
 
@@ -60,6 +75,8 @@ CREATE TABLE stay (
 	contact_id int8 NOT NULL,
 	location_id int8 NOT NULL,
 	owner_id int8 NOT NULL,
+	rule_food_id int8 NULL,
+	media_id int8 NULL,
 	CONSTRAINT stay_pkey PRIMARY KEY (id),
 	CONSTRAINT uk_stay_location1 UNIQUE (location_id),
 	CONSTRAINT uk_stay_contact1 UNIQUE (contact_id),
