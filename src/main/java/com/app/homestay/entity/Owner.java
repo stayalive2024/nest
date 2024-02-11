@@ -23,8 +23,8 @@ public class Owner {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contactId",referencedColumnName = "id")
     private Contact contact;
-    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL,orphanRemoval = true)
-    @JsonManagedReference(value="hs-ref")
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference(value="hs-owner-ref")
     private List<Stay> stays;
 
 }

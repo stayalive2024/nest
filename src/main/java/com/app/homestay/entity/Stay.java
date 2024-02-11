@@ -1,10 +1,13 @@
 package com.app.homestay.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "stay")
@@ -19,7 +22,7 @@ public class Stay {
 
     @ManyToOne
     @JoinColumn(name="owner_id")
-    @JsonBackReference(value="hs-ref")
+    @JsonBackReference(value="hs-owner-ref")
     private Owner owner;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id",referencedColumnName = "id")
@@ -37,5 +40,20 @@ public class Stay {
     @JoinColumn(name = "media_id",referencedColumnName = "id")
     private Media media;
 
+    @OneToMany(mappedBy = "stay",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference(value="hs-room-ref")
+    private List<HsRoom> rooms;
+
+    @Column(name="discount")
+    private int discount;
+
+    @Column(name="discount_type")
+    private String discountType; // flat,percentage
+
+    @Column(name="max_discount")
+    private int max_discount;
+
+    @Column(name="about")
+    private String aboutStay;
 
 }

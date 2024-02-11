@@ -51,7 +51,7 @@ CREATE TABLE rule_food (
 	id bigserial NOT NULL,
 	rule varchar NULL,
 	food varchar NULL,
-	amenitie varchar NULL,
+	amenity varchar NULL,
 	CONSTRAINT rule_pkey PRIMARY KEY (id)
 );
 
@@ -77,11 +77,32 @@ CREATE TABLE stay (
 	owner_id int8 NOT NULL,
 	rule_food_id int8 NULL,
 	media_id int8 NULL,
+	discount int4 NULL,
+	discount_type varchar NULL,
+	about varchar NOT NULL,
+	max_discount int4 NULL,
 	CONSTRAINT stay_pkey PRIMARY KEY (id),
 	CONSTRAINT uk_stay_location1 UNIQUE (location_id),
 	CONSTRAINT uk_stay_contact1 UNIQUE (contact_id),
 	CONSTRAINT fk_stay_conact1 FOREIGN KEY (contact_id) REFERENCES contact_details(id),
 	CONSTRAINT fk_stay_location1 FOREIGN KEY (location_id) REFERENCES hs_location(id),
 	CONSTRAINT fk_stay_owner1 FOREIGN KEY (owner_id) REFERENCES hs_owner(id)
+);
+
+CREATE TABLE hs_room (
+	id bigserial NOT NULL,
+	title varchar(255) NULL,
+	type varchar(255) NOT NULL,
+	capacity int4 NOT NULL,
+	stay_id int8 NOT NULL,
+	media_id int8 NULL,
+	person_cost int4 NOT NULL,
+	discount int4 NULL,
+    discount_type varchar NULL,
+    other_info varchar NULL,
+    bed_title varchar NOT NULL,
+    amenity varchar NOT NULL,
+	CONSTRAINT pk_hs_room_pkey PRIMARY KEY (id),
+	CONSTRAINT fk_room_stay1 FOREIGN KEY (stay_id) REFERENCES stay(id)
 );
 

@@ -25,7 +25,7 @@ public class RuleFoodAmenitie {
     private String food;
 
     // will store object [title{[string1,string2]},title{[string1,string2]}]
-    @Column(name="amenitie")
-    private String amenitie;
+    @Column(name="amenity")
+    private String amenity;
 
 }
